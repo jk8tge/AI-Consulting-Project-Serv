@@ -1,9 +1,6 @@
-from fastapi import FastAPI
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
-
-# **** OpenAI Testing Step 1: Edit this from prompt -> from fitness_scheme.py ****
 from fitness_scheme import FitnessResponse, FitnessPrompt, fitness_prompt, SYSTEM_MSG
 
 # OpenAI API key check
@@ -35,30 +32,6 @@ p = FitnessPrompt(
 )
 
 
-
-@app.get("/gerate_plan")
-def generate_plan():
-    try:
-        return call_openai(p)
-    
-
-def call_openai(p: FitnessPrompt) -> FitnessResponse:
-    # 1. curl
-    # -> backend 리포가 있고 <- 서버구동
-    # app은 앱이자나 이건 개인 기기 구동하는거잖아
-    
-    # 2. python -m 해가지ㅗㄱ return을 받아오은 ㄴ내장 라이브러리
-    return response
-
-
-///
-curl -X POST https://api.openai.com/v1/chat/completions \
-  -H "Content-Type: application/json" \ 
-
-///
-
-
-
 # Pydantic Structured Input only
 response = client.responses.parse(
     model=OPENAI_MODEL,
@@ -78,5 +51,3 @@ response = client.responses.parse(
 
 print(response.output_parsed)
 
-
-response.daily[0].block[0].details[0].done = True
