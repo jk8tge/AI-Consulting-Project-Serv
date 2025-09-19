@@ -1,5 +1,5 @@
 import json
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Body
 import os
 #from tenacity import retry, stop_after_attempt, wait_exponential
 from dotenv import load_dotenv
@@ -54,8 +54,8 @@ def health():
     return {"ok": True}
 
 @app.post("/test", response_model=FitnessResponse)
-def generate_fitness_plan():
+def generate_fitness_plan(prompt: FitnessPrompt = Body(...)):
     try:
-        return call_openai(p).output_parsed
+        return call_openai(prompt).output_parsed
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
